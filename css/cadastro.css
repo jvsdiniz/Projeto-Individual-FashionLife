@@ -1,0 +1,30 @@
+.imagem-fundo-cadastro{
+    display: flex;
+    background-position: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-image: url(../imgs/backgrund-login-cadastro.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.boxCadastro{
+    width: 25%;
+    height: 65%;
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px 10px black;
+    border: solid 1px blueviolet;
+    margin-top: 60px;
+}
+
+.boxTexto{
+    font-family: poppins, Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    display: flex;
+    padding: 25px;
+    padding-top: 25px;
+}

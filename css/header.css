@@ -80,7 +80,10 @@ body{
 }
 .ca{
     background: blueviolet;
-    border-radius: 5px;
+    border-radius: 3px;
+    color: #fff;
+    border: solid 1px black;
+
 }
 
 .joao li:hover{

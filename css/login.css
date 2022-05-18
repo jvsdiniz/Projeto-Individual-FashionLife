@@ -22,26 +22,26 @@
 
 .boxTexto{
     font-family: poppins, Arial, Helvetica, sans-serif;
-    font-size: 15.5px;
+    font-size: 25px;
     font-weight: 900;
     display: flex;
     padding: 25px;
-    padding-top: 25px;
+    padding-top: 4vw;
 }
 
 .boxTexto1{
     font-family: poppins, Arial, Helvetica, sans-serif;
-    font-size: 13px;
+    font-size: 18px;
     font-weight: 600;
     display: flex;
     padding: 25px;
-    padding-top: 1px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .boxTexto1 input {
-    height: 14px;
+    height: 20px;
 }
 
 .divbutton{
@@ -50,7 +50,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 16vh;
+    height: 20vh;
+    /* background-color: black; */
 }
 
 .divbutton button{
@@ -70,6 +71,3 @@
 .divbutton button:hover{
     box-shadow: 2px 2px 2px black;
 }
-
-
-

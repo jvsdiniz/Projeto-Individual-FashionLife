@@ -81,10 +81,17 @@ body{
 .ca{
     background: blueviolet;
     border-radius: 3px;
-    color: #fff;
+    color: rgb(0, 0, 0);
     border: solid 1px black;
-
 }
+
+.ca:hover {
+    -webkit-transition: background 0.3s 0s linear;
+-moz-transition: background 0.3s 0s linear;
+-o-transition: background 0.3s 0s linear;
+transition: background 0.3s 0s linear;
+}
+
 
 .joao li:hover{
     border: 2px solid rgb(0, 0, 0);

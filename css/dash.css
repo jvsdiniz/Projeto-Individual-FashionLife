@@ -1,0 +1,33 @@
+body{
+margin: 0;
+}
+
+.divLateral{
+    display: flex;
+    height: 100vh;
+    width: 20%;
+    background-color: black;
+    text-align: center;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.divTitle{
+    font-size: 45px;
+    font-family: Capuche;
+    color: #FFF;
+    padding-top: 35%;
+}
+
+.Bluefont{
+    font-size: 45px;
+    font-family: Capuche;
+    color: blueviolet;
+}
+
+.divVotacao{
+    font-size: 20px;
+    font-family: poppins;
+    padding-top: 20%;
+    color: rgb(255, 255, 255);
+}

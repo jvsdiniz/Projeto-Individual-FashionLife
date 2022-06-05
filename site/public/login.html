@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FL | Login</title>
+    <link rel="stylesheet" href="../public/css/header.css">
+    <link rel="stylesheet" href="../public/css/fonts.css">
+    <link rel="stylesheet" href="../public/css/login.css">
+</head>
+<body>
+
+    <!-- Imagem de fundo -->
+    <div class="imagem-fundo-cadastro">
+    <!-- HTML do head -->
+   <div class="head">
+       <div class="head1">
+           <div class="texthead1">Fashion<span class="bluetext">Life</span></div>
+       </div>
+       <div class="head2">
+           <ul>
+               <li><a href="home.html">Home</a></li>
+               <li><a href="street.html">StreetWear</a></li>
+               <li><a href="altacostura.html">Alta Costura</a></li>
+               <li><a href="curiosidades.html">Curiosidades</a></li>
+               <li><a href="#">Login</a></li>
+               <div class="joao">
+                <li class="ca"><a href="cadastro.html">Cadastro</a></li>                
+               </div>           
+           </ul>
+       </div>
+   </div>
+
+   <!-- FIM do Head -->
+
+   <!-- Inicio da tela de login -->
+
+   <div class="boxCadastro">
+       <div class="boxDentro">
+           <div class="boxTexto">
+                Bem vindo de volta, faça Login:
+            </div>
+            <div class="boxTexto1">Digite seu Email: <br>
+                <input type="email" id="email_input" placeholder="fashionlife@fashion.com">
+            </div>
+            <div class="boxTexto1">Digite sua senha: <br>
+                <input type="password" id="senha_input" placeholder="********">
+            </div>
+                <div class="divbutton">
+                    <button onclick="entrar()">Login</button>
+                </div>
+            </div>
+        </div>
+   </div>
+
+
+
+
+</div>
+
+    
+</body>
+</html>
+
+
+
+<script>
+
+
+    function entrar() {
+        // aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            // cardErro.style.display = "block"
+             alert('Preencha todos os campos');
+            // finalizarAguardar();
+            return false;
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario; // DATABASE
+
+                    setTimeout(function () {
+                        window.location = "dashboard/indexDash.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+
+</script>

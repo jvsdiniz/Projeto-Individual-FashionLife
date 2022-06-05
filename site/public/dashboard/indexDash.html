@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionLife</title>
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/dash.css">
+</head>
+<body>
+
+    <div class="divcor">
+    <div class="divLateral">
+        <div class="divTitle">Bem-<div class="Bluefont">Vindo</div></div>
+
+
+        <div class="divVotacao">VOTAÇÕES</div>
+
+        <a href="../public/site/index.html"><div class="divVotacao">HOME</div></a> 
+
+    </div>
+
+    <div class="divisao"></div>
+
+    <div class="divTotalVotacao">
+        <div class="divBranca">
+
+            <div class="divTitulo">Qual será o melhor desfile da SPFW?</div>
+
+            <div class="select">
+            <select name="" id="selDesfile">
+                <option value="1">À La Garçonne</option>
+                <option value="2">Dendezeiro </option>
+                <option value="3">Apartamento 03</option>
+                <option value="4">Handred</option>
+                <option value="5">ÀLG</option>
+            </select>
+            </div>
+
+            <div class="divbutton">
+                <button onclick="votar()">Votar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="graph">
+        <canvas id="canvas_grafico"></canvas>
+    </div>
+
+</div>
+</body>
+</html>
+
+<script>
+    function votar() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var id = sessionStorage.ID_USUARIO;
+        var desfileVar = selDesfile.value;
+
+        if (desfileVar == "" ) {
+            // cardErro.style.display = "block"
+             alert ('Inclua um voto válido');
+
+            // finalizarAguardar();
+            return false;
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/votar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                idServer: id,
+                desfileServer: desfileVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                // cardErro.style.display = "block";
+
+                alert ("Voto feito com sucesso");
+
+                // setTimeout(() => {
+                //     window.location = "login.html";
+                // }, "2000")
+                
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o voto");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+
+</script>
+
+
+<script>
+    window.onload = obterDadosGrafico(1);
+
+function obterDadosGrafico(idAquario) {
+    alterarTitulo(idAquario)
+
+    // if (proximaAtualizacao != undefined) {
+    //     clearTimeout(proximaAtualizacao);
+    // }
+
+    fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico(resposta, idAquario);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+
+
+
+function plotarGrafico(resposta, idAquario) {
+        console.log('iniciando plotagem do gráfico...');
+
+        var dados = {
+            labels: [],
+            datasets: [
+                {
+                    // yAxisID: 'y-umidade',
+                    label: 'Votação',
+                    borderColor: '#32B9CD',
+                    backgroundColor: '#32b9cd8f',
+                    fill: true,
+                    data: []
+                }
+                // ,
+                // {
+                //     yAxisID: 'y-temperatura',
+                //     label: 'Temperatura',
+                //     borderColor: '#FFF',
+                //     backgroundColor: '#32b9cd8f',
+                //     fill: true,
+                //     data: []
+                // }
+            ]
+        };
+
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            dados.labels.push(registro.momento); //EIXO X DO GRAFICO
+            dados.datasets[0].data.push(registro.umidade); //EIXO Y DO GRAFICO
+            // dados.datasets[1].data.push(registro.temperatura);
+        }
+
+        console.log(JSON.stringify(dados));
+
+        var ctx = canvas_grafico.getContext('2d');
+        window.grafico_linha = new Chart(ctx, {
+            type: 'bar',
+            data: dados,
+            options:{
+                scales: {
+                    yAxes: [{
+                        // type: 'linear',
+                        // display: true,
+                        // position: 'left',
+                        // id: 'y-temperatura',
+                        ticks: {
+                            beginAtZero: true
+                            // max: 100,
+                            // min: 0
+                        }
+                    }],
+                }
+            }
+        });
+
+        // setTimeout(() => atualizarGrafico(idAquario, dados), 2000);
+    }
+
+</script>

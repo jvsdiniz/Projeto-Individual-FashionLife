@@ -1,0 +1,121 @@
+.foto-fundo-street{
+    background-image: url(../imgs/background-sup.png);
+    display: flex;
+    background-position: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.div1home{
+    
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* background-color: aquamarine; */
+    width: 100%;
+    top: 50%;
+    font-size: 30px;
+    font-family: poppins;
+    font-weight: bolder;
+    position: absolute;
+    color: #fff;
+}
+
+/* CSS noticiaStreet */
+
+.noticiaStreet{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 130vh;
+}
+
+.borderTitle{
+    width: 80%;
+    height: 117vh;
+    /* background-color: blueviolet; */
+    border: solid 1px;
+    border-color: rgb(0, 0, 0);
+}
+
+.tituloN{
+    width: 100%;
+    height: 50px;
+    font-family: poppins;
+    font-size: 35px;
+    font-weight: bolder;
+}
+
+.escritaN{
+    font-family: poppins;
+    font-size: 15px;
+    text-align: justify;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 30px;
+    color: black;
+    font-weight: 200;
+}
+
+.imagemN img{
+    height: 400px;
+    /* width: auto; */
+    padding-top: 30px;
+}
+
+/* CSS CLASS */
+.noticiaStreetC{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 200vh;
+}
+
+.borderTitleC{
+    width: 80%;
+    height: 187vh;
+    /* background-color: blueviolet; */
+    border: solid 1px;
+    border-color: black;
+}
+
+.escritaNC{
+    font-family: poppins;
+    font-size: 15px;
+    text-align: justify;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 63px;
+}
+
+/* CSS PIET X NBA */
+
+.noticiaStreetCP{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 205vh;
+}
+
+.borderTitleCP{
+    width: 80%;
+    height: 180vh;
+    /* background-color: blueviolet; */
+    border: solid 1px;
+    border-color: rgb(0, 0, 0);
+}
+
+

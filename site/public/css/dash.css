@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Capuche';
+    src: url('../fonts/Capuche Trial.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body{
 margin: 0;
 }
@@ -106,4 +113,21 @@ a{
     height: 6vh;
     width: 13vw;
     /* box-shadow: 2px 2px 2px black; */
+}
+
+.graph{
+    background-color: #ecdcdc;
+    width: 40%;
+    height: 28%;
+    border-radius: 20px;
+    /* box-shadow: 1px 1px 1px 1px blueviolet ; */
+}
+
+.tamanho{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    height: 100vh;
+    /* background-color: #FFF; */
 }

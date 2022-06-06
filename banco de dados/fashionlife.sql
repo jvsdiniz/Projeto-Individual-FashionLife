@@ -1,6 +1,6 @@
 create database fashionlife;
 
-use fashion life;
+use fashionlife;
 
 create table usuario(
 idUsuario int primary key auto_increment, 
@@ -9,11 +9,25 @@ email varchar (60),
 senha varchar (15),
 idade int,
 genero char(5),
-constraint chkTipo in(genero = 'Homem', 'Mulher');
+check (genero = 'Homem' or genero = 'Mulher'),
+fkVoto int,
+foreign key (fkVoto) references desfile(idDesfile)
+);
 
--- create table desfile (
--- idVotacao int primary key auto_increment,
+alter table usuario modify column genero varchar(6);
 
--- fkVoto int,
--- foreign key (fkVoto) references usuario(idUsuario)
--- );
+create table desfile(
+idDesfile int primary key auto_increment,
+nomeDesfile varchar(45) 
+);
+
+insert desfile values
+(null, 'À La Garçonne'),
+(null, 'Dendezeiro'),
+(null, 'Apartamento 03'),
+(null, 'Handred'),
+(null, 'ÀLG');
+
+
+select * from usuario;
+

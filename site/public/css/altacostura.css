@@ -79,12 +79,12 @@
     flex-direction: column;
     text-align: center;
     width: 100%;
-    height: 245vh;
+    height: 220vh;
 }
 
 .borderTitle2{
     width: 80%;
-    height: 225vh;
+    height: 200vh;
     /* background-color: blueviolet; */
     border: solid 1px;
     border-color: rgb(0, 0, 0);

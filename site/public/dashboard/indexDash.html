@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,50 +8,61 @@
     <title>FashionLife</title>
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/dash.css">
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
 </head>
+
 <body>
 
     <div class="divcor">
-    <div class="divLateral">
-        <div class="divTitle">Bem-<div class="Bluefont">Vindo</div></div>
+        <div class="divLateral">
+            <div class="divTitle">Bem-Vindo</div>
 
 
-        <div class="divVotacao">VOTAÇÕES</div>
+            <div class="divVotacao">VOTAÇÕES</div>
 
-        <a href="../public/site/index.html"><div class="divVotacao">HOME</div></a> 
-
-    </div>
-
-    <div class="divisao"></div>
-
-    <div class="divTotalVotacao">
-        <div class="divBranca">
-
-            <div class="divTitulo">Qual será o melhor desfile da SPFW?</div>
-
-            <div class="select">
-            <select name="" id="selDesfile">
-                <option value="1">À La Garçonne</option>
-                <option value="2">Dendezeiro </option>
-                <option value="3">Apartamento 03</option>
-                <option value="4">Handred</option>
-                <option value="5">ÀLG</option>
-            </select>
-            </div>
-
-            <div class="divbutton">
-                <button onclick="votar()">Votar</button>
-            </div>
+            <a href="../index.html">
+                <div class="divVotacao">HOME</div>
+            </a>
 
         </div>
-    </div>
 
-    <div class="graph">
-        <canvas id="canvas_grafico"></canvas>
-    </div>
+        <div class="divisao"></div>
 
-</div>
+        <div class="divTotalVotacao">
+
+            <div class="tamanho">
+
+                <div class="divBranca">
+
+                    <div class="divTitulo">Qual será o melhor desfile da SPFW?</div>
+
+                    <div class="select">
+                        <select name="" id="selDesfile">
+                            <option value="1">À La Garçonne</option>
+                            <option value="2">Dendezeiro </option>
+                            <option value="3">Apartamento 03</option>
+                            <option value="4">Handred</option>
+                            <option value="5">ÀLG</option>
+                        </select>
+                    </div>
+
+                    <div class="divbutton">
+                        <button onclick="votar()">Votar</button>
+                    </div>
+
+                    
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_grafico"></canvas>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
 </body>
+
 </html>
 
 <script>
@@ -62,9 +74,9 @@
         var id = sessionStorage.ID_USUARIO;
         var desfileVar = selDesfile.value;
 
-        if (desfileVar == "" ) {
+        if (desfileVar == "") {
             // cardErro.style.display = "block"
-             alert ('Inclua um voto válido');
+            alert('Inclua um voto válido');
 
             // finalizarAguardar();
             return false;
@@ -92,12 +104,12 @@
             if (resposta.ok) {
                 // cardErro.style.display = "block";
 
-                alert ("Voto feito com sucesso");
+                alert("Voto feito com sucesso");
 
-                // setTimeout(() => {
-                //     window.location = "login.html";
-                // }, "2000")
-                
+                setTimeout(() => {
+                            location.reload();
+                }, "2000")
+
                 // limparFormulario();
                 // finalizarAguardar();
             } else {
@@ -121,34 +133,34 @@
 <script>
     window.onload = obterDadosGrafico(1);
 
-function obterDadosGrafico(idAquario) {
-    alterarTitulo(idAquario)
+    function obterDadosGrafico(idAquario) {
+        // alterarTitulo(idAquario)
 
-    // if (proximaAtualizacao != undefined) {
-    //     clearTimeout(proximaAtualizacao);
-    // }
+        // if (proximaAtualizacao != undefined) {
+        //     clearTimeout(proximaAtualizacao);
+        // }
 
-    fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                resposta.reverse();
+        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
 
-                plotarGrafico(resposta, idAquario);
+                    plotarGrafico(resposta, idAquario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-}
+    }
 
 
 
 
-function plotarGrafico(resposta, idAquario) {
+    function plotarGrafico(resposta, idAquario) {
         console.log('iniciando plotagem do gráfico...');
 
         var dados = {
@@ -157,8 +169,8 @@ function plotarGrafico(resposta, idAquario) {
                 {
                     // yAxisID: 'y-umidade',
                     label: 'Votação',
-                    borderColor: '#32B9CD',
-                    backgroundColor: '#32b9cd8f',
+                    borderColor: '#fff',
+                    backgroundColor: '#8a2be2',
                     fill: true,
                     data: []
                 }
@@ -176,8 +188,8 @@ function plotarGrafico(resposta, idAquario) {
 
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            dados.labels.push(registro.momento); //EIXO X DO GRAFICO
-            dados.datasets[0].data.push(registro.umidade); //EIXO Y DO GRAFICO
+            dados.labels.push(registro.nomeDesfile); //EIXO X DO GRAFICO
+            dados.datasets[0].data.push(registro.contagem); //EIXO Y DO GRAFICO
             // dados.datasets[1].data.push(registro.temperatura);
         }
 
@@ -187,7 +199,7 @@ function plotarGrafico(resposta, idAquario) {
         window.grafico_linha = new Chart(ctx, {
             type: 'bar',
             data: dados,
-            options:{
+            options: {
                 scales: {
                     yAxes: [{
                         // type: 'linear',
